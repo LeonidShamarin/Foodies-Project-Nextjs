@@ -4,11 +4,12 @@ import classes from "./page.module.css";
 
 import { notFound } from "next/navigation";
 
-export default function MealDetailsPage({ params }) {
+export default async function MealDetailsPage({ params }) {
   // атрибут fill вказує, що зображення має заповнити контейнер, в якому воно знаходиться,
   // зберігаючи при цьому правильні пропорції. Це корисно для адаптивних дизайнів, де
   // зображення повинні масштабуватися відповідно до розмірів їхнього контейнера.
-  const meal = getMeal(params.mealSlug);
+  const { mealSlug } = await params;
+  const meal = getMeal(mealSlug);
 
   if (!meal) {
     notFound();
